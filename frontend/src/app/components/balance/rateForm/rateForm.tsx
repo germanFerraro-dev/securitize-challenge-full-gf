@@ -41,8 +41,6 @@ const RateForm: React.FC<RateFormProps> = ({
         setIsEditingRate,
         rates
     });
-    
-    console.log(walletBalance, rates)
 
     if (rates.length == 0 || walletBalance == null) {
         return <CircularProgress />;
@@ -60,7 +58,7 @@ const RateForm: React.FC<RateFormProps> = ({
     );
 
     return (
-        <Grid item md={12} xl={6}>
+        <Grid item xs={12} md={12} xl={6}>
             <Card
                 sx={{
                 margin: "1rem",

@@ -20,6 +20,8 @@ Built with NestJS + Postgres for database. Im handling migrations and communicat
 
 The wallets saved are stored in the database, and the user is able to mark/unmark as favorites, and delete them. Information regarding balance and age of the wallet is being called directly from the etherscan API, with endpoints available in the app. Same goes with rates, but in this case the data is fetched from coingecko API.
 
+Swagger is implemented for clean API status responses and access to visual API docs.
+
 ### Frontend
 
 Built with Vite + TS, redux-toolkit for managing states and queries to the backend, and Material UI + TailwindCSS for styling and components. The idea behind this style stack is to build and style components quickly, while still being customizable.
@@ -47,6 +49,10 @@ All the features of the application fulfill the requirements from the assignment
 2. Local url for frontend application: `http://localhost:5173/`
 
 3. Local url for backend API endpoint: `http://localhost:4000/`
+
+## Swagger 
+
+You can access Swagger docs in `http://localhost:4000/api/docs`
 
 ## API Endpoints Documentation
 

@@ -14,24 +14,21 @@ import Typography from '@mui/material/Typography';
 
 import { RateForm } from './rateForm';
 import { RootState } from '../../../store/store';
-import { useGetBalanceQuery } from '../../../data/wallets.api';
 import { ExchangeRateInterface } from '../../../types/ExchangeRate';
 
 type BalanceProps = {
   address: string;
+  walletBalance: number;
 }
 
-const Balance: React.FC<BalanceProps> = ({ address }) => {
-  const { data: walletBalance } = useGetBalanceQuery({walletAddress: address});
+const Balance: React.FC<BalanceProps> = ({ address, walletBalance }) => {
   const rates: ExchangeRateInterface[] = useSelector((state: RootState) => state.rates);
   const [selectedRate, setSelectedRate] = useState('usd');
   const [isEditingRate, setIsEditingRate] = useState(false);
 
-  const balance = walletBalance?.walletBalance as number;
   const selectedRateInfo =  rates && rates.find(rate => rate.currency === selectedRate);
 
-
-  if (rates.length == 0 || !walletBalance) {
+  if (rates.length == 0 || walletBalance == undefined ) {
     return (
       <div className='h-48 flex items-center justify-center'>
         <CircularProgress />
@@ -45,7 +42,7 @@ const Balance: React.FC<BalanceProps> = ({ address }) => {
   }
   
   const selectedBalance = rates
-    ? balance * (selectedRateInfo?.rate || 0) : 0;
+    ? walletBalance * (selectedRateInfo?.rate || 0) : 0;
 
 
   return (
@@ -56,9 +53,9 @@ const Balance: React.FC<BalanceProps> = ({ address }) => {
         isEditingRate={isEditingRate}
         setIsEditingRate={setIsEditingRate}
         rates={rates}
-        walletBalance={balance}
+        walletBalance={walletBalance}
       />
-      <Grid item md={12} xl={6}>
+      <Grid item xs={12} md={12} xl={6}>
         <Card
           sx={{
             height: "150px",
